@@ -2,18 +2,16 @@ import { MatchResponseDTO } from "../api";
 
 export class EventParser {
   static makeEventName(match: MatchResponseDTO) {
-    if (match.sport === "soccer") {
-      return match.participant1 + " - " + match.participant2;
-    } else if (match.sport === "tennis") {
-      return match.participant1 + " vs " + match.participant2;
-    } else if (match.sport === "volleyball") {
-      return match.participant1 + " - " + match.participant2;
-    } else if (match.sport === "handball") {
-      return match.participant1 + " vs " + match.participant2;
-    } else if (match.sport === "basketball") {
-      return match.participant1 + " - " + match.participant2;
-    } else {
-      return "Exception: invalid sport";
+    switch (match.sport) {
+      case "soccer":
+      case "volleyball":
+      case "basketball":
+        return `${match.participant1} - ${match.participant2}`;
+      case "tennis":
+      case "handball":
+        return `${match.participant1} vs ${match.participant2}`;
+      default:
+        return "Exception: invalid sport";
     }
   }
 
