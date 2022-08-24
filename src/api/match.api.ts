@@ -1,6 +1,6 @@
-import { Match } from "../models/match.models";
+import { MatchResponseDTO } from "./match.dto";
 
-const exampleMatches: Match[] = [
+const exampleMatches: MatchResponseDTO[] = [
   {
     sport: "soccer",
     participant1: "Chelsea",
@@ -41,4 +41,6 @@ const exampleMatches: Match[] = [
 
 // mimics an API call
 export const getMatches = () =>
-  new Promise<Match[]>((res) => setTimeout(() => res(exampleMatches), 1000));
+  new Promise<MatchResponseDTO[]>((res) =>
+    setTimeout(() => res(exampleMatches), 1000)
+  );
