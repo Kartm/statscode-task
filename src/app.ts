@@ -1,4 +1,5 @@
-import { Match } from "./models/match.models";
+import { getMatches } from "./api";
+import { Match } from "./models";
 
 class EventParser {
   makeEventName(match: Match) {
@@ -25,13 +26,13 @@ class EventParser {
         /([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+)/.exec(
           match.score
         );
-      var set1 = scores[2];
-      var set2 = scores[3];
-      var set3 = scores[4];
+      var set1 = scores![2];
+      var set2 = scores![3];
+      var set3 = scores![4];
 
       return (
         "Main score: " +
-        scores[1] +
+        scores![1] +
         " (" +
         "set1 " +
         set1 +
@@ -48,13 +49,13 @@ class EventParser {
         /([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+)/.exec(
           match.score
         );
-      var set1 = scores[2];
-      var set2 = scores[3];
-      var set3 = scores[4];
+      var set1 = scores![2];
+      var set2 = scores![3];
+      var set3 = scores![4];
 
       return (
         "Main score: " +
-        scores[1] +
+        scores![1] +
         " (" +
         "set1 " +
         set1 +
@@ -84,22 +85,28 @@ class EventParser {
   }
 }
 
-let matchesParsed = [];
+const printParsedMatches = async () => {
+  let matchesParsed = [];
 
-for (var i = 0; i < matches.length; i++) {
-  let parser = new EventParser();
-  let name = parser.makeEventName(matches[i]);
-  let score = parser.formatScore(matches[i]);
+  const matches = await getMatches();
 
-  if (
-    name !== "Exception: invalid sport" &&
-    score !== "Exception: invalid sport"
-  ) {
-    matchesParsed.push({
-      name,
-      score,
-    });
+  for (var i = 0; i < matches.length; i++) {
+    let parser = new EventParser();
+    let name = parser.makeEventName(matches[i]);
+    let score = parser.formatScore(matches[i]);
+
+    if (
+      name !== "Exception: invalid sport" &&
+      score !== "Exception: invalid sport"
+    ) {
+      matchesParsed.push({
+        name,
+        score,
+      });
+    }
   }
-}
 
-console.log(matchesParsed);
+  console.log(matchesParsed);
+};
+
+printParsedMatches();

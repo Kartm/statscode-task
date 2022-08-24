@@ -41,4 +41,4 @@ const exampleMatches: Match[] = [
 
 // mimics an API call
 export const getMatches = () =>
-  new Promise((res) => setTimeout(() => res(exampleMatches), 1000));
+  new Promise<Match[]>((res) => setTimeout(() => res(exampleMatches), 1000));
