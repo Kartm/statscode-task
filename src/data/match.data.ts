@@ -24,28 +24,15 @@ export class EventParser {
         return match.score.flat().join(",");
       case "tennis":
       case "volleyball": {
-        var scores =
-          /([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+),([0-9]+\:[0-9]+)/.exec(
-            match.score
-          );
-        var set1 = scores![2];
-        var set2 = scores![3];
-        var set3 = scores![4];
+        const scores = match.score.split(",");
 
-        return (
-          "Main score: " +
-          scores![1] +
-          " (" +
-          "set1 " +
-          set1 +
-          ", " +
-          "set2 " +
-          set2 +
-          ", " +
-          "set3 " +
-          set3 +
-          ")"
-        );
+        const [mainScore, ...rest] = scores;
+
+        const scoresText = rest
+          .map((set, i) => `set${i + 1} ${set}`)
+          .join(", ");
+
+        return `Main score: ${mainScore} (${scoresText})`;
       }
       default:
         return "Exception: invalid sport";
