@@ -90,11 +90,6 @@ describe("EventParser parses a match of", () => {
       sport: "ski jumping",
     };
 
-    const parsedMatch = EventParser.parse(matchResponse);
-
-    expect(parsedMatch).toEqual({
-      name: "Exception: invalid sport",
-      score: "Exception: invalid sport",
-    });
+    expect(() => EventParser.parse(matchResponse)).toThrow();
   });
 });
