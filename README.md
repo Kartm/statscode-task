@@ -1,7 +1,14 @@
 # Running the app
 
-`npm install`
-`npm run app`
+1. `npm install`
+2. `npm run app`
+
+# Running tests
+
+1. `npm install`
+2. `npm test`
+
+# Task description
 
 - You have to refactor code in app.js file. Change it, split it, improve it, do it your own way!
 - You can use version of node you prefer
