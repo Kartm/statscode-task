@@ -1,7 +1,13 @@
 import { MatchResponseDTO } from "../api";
+import { Match } from "../models";
 
 export class EventParser {
-  static makeEventName(match: MatchResponseDTO) {
+  static parse = (match: MatchResponseDTO): Match => ({
+    name: this.makeEventName(match),
+    score: this.formatScore(match),
+  });
+
+  private static makeEventName = (match: MatchResponseDTO) => {
     switch (match.sport) {
       case "soccer":
       case "volleyball":
@@ -15,9 +21,9 @@ export class EventParser {
           `Invalid sport: ${match.sport} does not contain an event name`
         );
     }
-  }
+  };
 
-  static formatScore(match: MatchResponseDTO) {
+  private static formatScore = (match: MatchResponseDTO) => {
     switch (match.sport) {
       case "soccer":
       case "handball":
@@ -41,5 +47,5 @@ export class EventParser {
           `Invalid sport: ${match.sport} does not contain a score`
         );
     }
-  }
+  };
 }

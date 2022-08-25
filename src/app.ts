@@ -7,10 +7,7 @@ const printParsedMatches = async () => {
   const matchesParsed = matches
     .map((match) => {
       try {
-        return {
-          name: EventParser.makeEventName(match),
-          score: EventParser.formatScore(match),
-        };
+        return EventParser.parse(match);
       } catch (e) {
         // I'm not sure whether a business requirement is to show an error or just ignore these matches
         // so it's failing silently for now

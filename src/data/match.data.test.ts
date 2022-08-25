@@ -10,10 +10,7 @@ describe("EventParser parses a match of", () => {
       score: "2:1",
     };
 
-    const parsedMatch = {
-      name: EventParser.makeEventName(matchResponse),
-      score: EventParser.formatScore(matchResponse),
-    };
+    const parsedMatch = EventParser.parse(matchResponse);
 
     expect(parsedMatch).toEqual({
       name: "Chelsea - Arsenal",
@@ -29,10 +26,7 @@ describe("EventParser parses a match of", () => {
       score: "3:0,25:23,25:19,25:21",
     };
 
-    const parsedMatch = {
-      name: EventParser.makeEventName(matchResponse),
-      score: EventParser.formatScore(matchResponse),
-    };
+    const parsedMatch = EventParser.parse(matchResponse);
 
     expect(parsedMatch).toEqual({
       name: "Germany - France",
@@ -48,10 +42,7 @@ describe("EventParser parses a match of", () => {
       score: "34:26",
     };
 
-    const parsedMatch = {
-      name: EventParser.makeEventName(matchResponse),
-      score: EventParser.formatScore(matchResponse),
-    };
+    const parsedMatch = EventParser.parse(matchResponse);
 
     expect(parsedMatch).toEqual({
       name: "Pogoń Szczeciń vs Azoty Puławy",
@@ -70,10 +61,7 @@ describe("EventParser parses a match of", () => {
       ],
     };
 
-    const parsedMatch = {
-      name: EventParser.makeEventName(matchResponse),
-      score: EventParser.formatScore(matchResponse),
-    };
+    const parsedMatch = EventParser.parse(matchResponse);
 
     expect(parsedMatch).toEqual({
       name: "GKS Tychy - GKS Katowice",
@@ -89,10 +77,7 @@ describe("EventParser parses a match of", () => {
       score: "2:1,7:6,6:3,6:7",
     };
 
-    const parsedMatch = {
-      name: EventParser.makeEventName(matchResponse),
-      score: EventParser.formatScore(matchResponse),
-    };
+    const parsedMatch = EventParser.parse(matchResponse);
 
     expect(parsedMatch).toEqual({
       name: "Maria Sharapova vs Serena Williams",
@@ -105,10 +90,7 @@ describe("EventParser parses a match of", () => {
       sport: "ski jumping",
     };
 
-    const parsedMatch = {
-      name: EventParser.makeEventName(matchResponse),
-      score: EventParser.formatScore(matchResponse),
-    };
+    const parsedMatch = EventParser.parse(matchResponse);
 
     expect(parsedMatch).toEqual({
       name: "Exception: invalid sport",
