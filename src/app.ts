@@ -6,20 +6,19 @@ const printParsedMatches = async () => {
 
   const matchesParsed = matches
     .map((match) => {
-      const name = EventParser.makeEventName(match);
-      const score = EventParser.formatScore(match);
-
-      if (
-        name !== "Exception: invalid sport" &&
-        score !== "Exception: invalid sport"
-      ) {
-        return { name, score };
-      } else return null;
+      try {
+        return {
+          name: EventParser.makeEventName(match),
+          score: EventParser.formatScore(match),
+        };
+      } catch (e) {
+        // I'm not sure whether a business requirement is to show an error or just ignore these matches
+        // so it's failing silently for now
+        // console.error(e);
+        return null;
+      }
     })
     .filter((m) => m !== null);
-
-  // todo exceptions
-  // todo replace vars
 
   console.log(matchesParsed);
 };

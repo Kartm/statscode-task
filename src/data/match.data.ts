@@ -11,7 +11,9 @@ export class EventParser {
       case "handball":
         return `${match.participant1} vs ${match.participant2}`;
       default:
-        return "Exception: invalid sport";
+        throw new Error(
+          `Invalid sport: ${match.sport} does not contain an event name`
+        );
     }
   }
 
@@ -35,7 +37,9 @@ export class EventParser {
         return `Main score: ${mainScore} (${scoresText})`;
       }
       default:
-        return "Exception: invalid sport";
+        throw new Error(
+          `Invalid sport: ${match.sport} does not contain a score`
+        );
     }
   }
 }
